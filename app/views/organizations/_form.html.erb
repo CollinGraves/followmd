@@ -1,0 +1,19 @@
+<%= simple_form_for(@organization, wrapper: :horizontal_form, wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }, html: { class: 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+  </div>
+
+  <div class="d-flex">
+    <div class="ml-auto">
+      <%= f.button :submit %>
+      <%= f.button :cancel, to: organizations_path %>
+    </div>
+  </div>
+<% end %>
+
