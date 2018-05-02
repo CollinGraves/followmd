@@ -27,8 +27,10 @@ Rails.application.routes.draw do
     root 'landing#index'
 
     get 'about', to: 'landing#about'
-    get 'pricing', to: 'pricing#index'
-    get 'tos', to: 'legal#tos'
-    get 'privacy', to: 'legal#privacy'
+    get 'demo', to: 'landing#demo'
+    post 'request_demo', to: 'landing#request_demo'
+    get 'pricing', to: 'landing#pricing'
+    get 'tos', to: 'landing#tos'
+    get 'privacy', to: 'landing#privacy'
   end
 end

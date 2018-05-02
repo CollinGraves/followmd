@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501225059) do
+ActiveRecord::Schema.define(version: 20180502032211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "clinics", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
@@ -21,6 +27,47 @@ ActiveRecord::Schema.define(version: 20180501225059) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subdomain"], name: "index_organizations_on_subdomain", using: :btree
+  end
+
+  create_table "patient_details", force: :cascade do |t|
+    t.integer  "sequence_id"
+    t.string   "first_name",  null: false
+    t.string   "last_name"
+    t.string   "email",       null: false
+    t.string   "phone",       null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["sequence_id"], name: "index_patient_details_on_sequence_id", using: :btree
+  end
+
+  create_table "sequence_configuration_steps", force: :cascade do |t|
+    t.integer  "sequence_configuration_id"
+    t.string   "uri",                       null: false
+    t.text     "description"
+    t.integer  "days_from_start",           null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["sequence_configuration_id"], name: "index_sequence_configuration_steps_on_sequence_configuration_id", using: :btree
+  end
+
+  create_table "sequence_configurations", force: :cascade do |t|
+    t.integer  "clinic_id"
+    t.string   "name",                       null: false
+    t.boolean  "global",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["clinic_id"], name: "index_sequence_configurations_on_clinic_id", using: :btree
+  end
+
+  create_table "sequences", force: :cascade do |t|
+    t.integer  "clinic_id"
+    t.integer  "sequence_configuration_id"
+    t.boolean  "permission_to_contact",     default: false
+    t.datetime "start_date",                                null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.index ["clinic_id"], name: "index_sequences_on_clinic_id", using: :btree
+    t.index ["sequence_configuration_id"], name: "index_sequences_on_sequence_configuration_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,6 +91,7 @@ ActiveRecord::Schema.define(version: 20180501225059) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "organization_id"
+    t.string   "roles",                  default: [],              array: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["organization_id"], name: "index_users_on_organization_id", using: :btree
@@ -51,4 +99,9 @@ ActiveRecord::Schema.define(version: 20180501225059) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
   end
 
+  add_foreign_key "patient_details", "sequences"
+  add_foreign_key "sequence_configuration_steps", "sequence_configurations"
+  add_foreign_key "sequence_configurations", "clinics"
+  add_foreign_key "sequences", "clinics"
+  add_foreign_key "sequences", "sequence_configurations"
 end

@@ -4,8 +4,8 @@
 <% @title = 'Welcome' %>
 
 <main class="landing-5">
-  <div class="parallax-window" data-parallax="scroll" data-speed="0.5" data-image-src="<%= asset_path('rrt/stock/landscape_12.jpg') %>">
-    <%= render partial: 'content_blocks/headers/10' %>
+  <div class="parallax-window" data-parallax="scroll" data-speed="0.5" data-image-src="<%= asset_path('https://s3.amazonaws.com/followmd-assets/allef-vinicius-180699-unsplash+2.jpg') %>">
+    <%= render partial: 'content_blocks/custom/headers/10' %>
   </div>
 </main>
 
@@ -14,13 +14,64 @@
 </section>
 
 <section class="pt-5 pb-5 bg-dark">
-  <%= render partial: 'content_blocks/general/23' %>
+  <%= render partial: 'content_blocks/custom/general/23' %>
 </section>
 
 <section class="pt-5 pb-5 bg-gray-300">
   <%= render partial: 'content_blocks/general/18' %>
 </section>
 
-<section class="pt-5 pb-5 bg-dark">
-  <%= render partial: 'content_blocks/general/34' %>
-</section>
+<footer class="bg-dark">
+  <div class="container">
+    <div class="row no-gutter bg-dark p-5">
+      <div class="col-12 col-md-2">
+        <div class="d-flex flex-column flex-wrap align-items-start justify-content-center">
+          <img src="<%= image_path('rrt/pyrrmid_64.png') %>" class="mb-3" width="64" height="64" >
+          <h6 class="text-white"><%= app_name %></h6>
+        </div>
+      </div>
+      <div class="col-12 col-md-10 ml-md-auto text-white">
+        <div class="row">
+          <div class="col-12 col-md-3">
+            <h6>NAVIGATION</h6>
+            <ul class="list-unstyled">
+              <li><a href="javascript:" class="text-hover-light">Home</a></li>
+              <li><a href="javascript:" class="text-hover-light">About</a></li>
+              <li><a href="javascript:" class="text-hover-light">Projects</a></li>
+              <li><a href="javascript:" class="text-hover-light">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-3">
+            <h6>LEGAL</h6>
+            <ul class="list-unstyled">
+              <li><a href="javascript:" class="text-hover-light">Terms of Service</a></li>
+              <li><a href="javascript:" class="text-hover-light">Privacy Policy</a></li>
+              <li><a href="javascript:" class="text-hover-light">Cookie Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-3">
+            <h6>SUPPORT</h6>
+            <ul class="list-unstyled">
+              <li><a href="javascript:" class="text-hover-light">FAQ</a></li>
+              <li><a href="javascript:" class="text-hover-light">Help Desk</a></li>
+              <li><a href="javascript:" class="text-hover-light">Knowledge Base</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-3">
+            <h6>SUBSCRIBE</h6>
+            <form action="">
+              <input type="text" class="form-control text-white text-focus-dark small" placeholder="Your Email">
+              <button class="btn btn-success btn-sm btn-block mt-2" type="button">Get Notified</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row no-gutter bg-dark p-4">
+      <div class="col-12 text-center">
+        <p class="small text-muted m-0">&copy; 2017 &dash; <%= app_name %></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
